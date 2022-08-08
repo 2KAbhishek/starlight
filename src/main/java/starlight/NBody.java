@@ -55,3 +55,22 @@ public class NBody extends Canvas implements ActionListener {
         frame.setVisible(true);
     }
 }
+
+class Data {
+    int x, y, size, windowSize = 800;
+    Color color;
+    double velocity, dt = 0.1, maxVel = 10, maxMass = 10;
+
+    Data() {
+        x = x + (int) (Math.random() * windowSize);
+        y = y + (int) (Math.random() * windowSize);
+        color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
+        size = (int) (Math.random() * maxMass) + 1;
+        velocity = Math.random() * maxVel + 1;
+    }
+
+    public void move() {
+         x += (int) (Math.sin(y / 100 + (Math.random() * dt)) * velocity);
+        y += (int) (Math.sin(x / 100 + Math.random() * dt) * velocity);
+    }
+}
