@@ -5,13 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class NBody extends Canvas implements ActionListener {
-    public int n, x, y, size;
-    public double dt, maxVel, maxMass;
+    public int n, size;
+    static Data[] stars;
 
     public void init(int n) {
         this.n = n;
-        x = 0;
-        y = 0;
     }
 
     // Draw a circle of radius r at (x,y)
@@ -22,34 +20,39 @@ public class NBody extends Canvas implements ActionListener {
 
     public void paint(Graphics g) {
         super.paint(g);
-        g.setColor(Color.WHITE);
-        drawCircle(g, x, y, 10);
+        for (int i = 0; i < n; i++) {
+            g.setColor(stars[i].color);
+            drawCircle(g, (int) stars[i].x, (int) stars[i].y, (int) stars[i].size);
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
-        x++;
-        y++;
+        for (int i = 0; i < n; i++) {
+            stars[i].move();
+        }
         repaint();
         Toolkit.getDefaultToolkit().sync();
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("NBody");
+        JFrame frame = new JFrame("Stars");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         int n = Integer.parseInt(args[0]);
+
+        stars = new Data[n];
+        for (int i = 0; i < n; i++) {
+            stars[i] = new Data();
+        }
 
         NBody nbody = new NBody();
         nbody.setBackground(Color.BLACK);
         nbody.size = 800;
-        nbody.maxVel = 10;
-        nbody.maxMass = 10;
-        nbody.dt = 0.1;
         nbody.setPreferredSize(new Dimension(nbody.size, nbody.size));
         nbody.init(n);
         frame.add(nbody);
         frame.pack();
 
-        Timer timer = new Timer(10, nbody);
+        Timer timer = new Timer(100, nbody);
         timer.start();
 
         frame.setVisible(true);
