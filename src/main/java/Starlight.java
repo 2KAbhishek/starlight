@@ -71,7 +71,7 @@ class Data {
     }
 
     public void move() {
-         x += (int) (Math.sin(y / 100 + (Math.random() * dt)) * velocity);
+        x += (int) (Math.sin(y / 100 + (Math.random() * dt)) * velocity);
         y += (int) (Math.sin(x / 100 + Math.random() * dt) * velocity);
     }
 }
