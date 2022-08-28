@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class NBody extends Canvas implements ActionListener {
+public class Starlight extends Canvas implements ActionListener {
     public int n, size;
     static Data[] stars;
 
@@ -44,7 +44,7 @@ public class NBody extends Canvas implements ActionListener {
             stars[i] = new Data();
         }
 
-        NBody nbody = new NBody();
+        Starlight nbody = new Starlight();
         nbody.setBackground(Color.BLACK);
         nbody.size = 800;
         nbody.setPreferredSize(new Dimension(nbody.size, nbody.size));
